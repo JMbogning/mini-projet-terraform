@@ -1,54 +1,54 @@
-Author: Junior Mbogning
+Auteur : Junior Mbogning
 
-Context: Stage DevOps
+Contexte : Stage DevOps 
 
-Structure: eazytraining.fr
+Structure : eazytraining.fr
 
-LinkedIn: https://www.linkedin.com/in/juniormbogning/
+
+LinkedIn : https://www.linkedin.com/in/juniormbogning/
 
 ---
-# Infrastructure as Code with Terraform
+# Infrastructure as Code avec Terraform
 
-<img width="1200" alt="Terraform" src="https://github.com/Abdel-had/mini-projet-terraform/assets/101605739/0c1cb75c-f509-4559-94ca-4c1994cba3ad">
+<img width="1200" alt="Terraform" src="https://github.com/Abdel-had/mini-projet-terraform/assets/101605739/890fb4c0-f3ad-4d91-b169-486369a47e5a">
 
+Ce projet utilise Terraform pour déployer une application web sur AWS, en provisionnant une instance EC2 avec Ubuntu Bionic, un volume EBS, une adresse IP publique et un groupe de sécurité.
 
-This project uses Terraform to deploy a web application on AWS by provisioning an EC2 instance with Ubuntu Bionic, an EBS volume, a public IP address, and a security group.
+## Structure du Projet
 
-## Project Structure
+Le projet est divisé en modules réutilisables pour faciliter la gestion et la maintenance de l'infrastructure :
 
-The project is divided into reusable modules to facilitate the management and maintenance of the infrastructure:
+- `modules/ebs_volume`: Définit un volume EBS.
+- `modules/ec2_instance`: Configure une instance EC2 avec Ubuntu Bionic, installe nginx et utilise une clé SSH pour l'accès.
+- `modules/public_ip`: Assigne une adresse IP publique à l'instance EC2 et enregistre cette adresse dans `ip_ec2.txt`.
+- `modules/security_group`: Crée un groupe de sécurité qui autorise le trafic HTTP, HTTPS et SSH.
+- `app`: Dossier contenant la configuration de l'application qui utilise les modules pour déployer l'instance EC2.
 
-- `modules/ebs_volume`: Defines an EBS volume.
-- `modules/ec2_instance`: Configures an EC2 instance with Ubuntu Bionic, installs nginx, and uses an SSH key for access.
-- `modules/public_ip`: Assigns a public IP to the EC2 instance and records this address in `ip_ec2.txt`.
-- `modules/security_group`: Creates a security group that allows HTTP, HTTPS, and SSH traffic.
-- `app`: Folder containing the application configuration that uses the modules to deploy the EC2 instance.
+## Prérequis
 
-## Prerequisites
+- Terraform v0.12+ installé sur votre machine locale.
+- AWS CLI configuré avec les identifiants appropriés.
+- Un bucket S3 pour le backend de Terraform (déjà créé puis configuré dans `app/main.tf`).
+- Une clé SSH nommée `devops-abdelhad` doit être disponible et configurée dans AWS.
 
-- Terraform v0.12+ installed on your local machine.
-- AWS CLI configured with the appropriate credentials.
-- An S3 bucket for the Terraform backend (already created and configured in `app/main.tf`).
-- An SSH key named `devops-abdelhad` must be available and configured in AWS.
+## Démarrage Rapide
 
-## Quick Start
-
-1. Clone this repository to your local machine.
+1. Clonez ce dépôt sur votre machine locale.
 
     ```
     git clone https://github.com/Abdel-had/mini-projet-terraform.git
     ```
 
-2. Ensure your AWS credentials are correctly configured.
+2. Assurez-vous que vos identifiants AWS sont configurés correctement.
 
-    On Windows:
+    Sur Windows :
 
     ```ps1
     $env:AWS_ACCESS_KEY_ID = "PUT_YOUR_OWN"
     $env:AWS_SECRET_ACCESS_KEY = "PUT_YOUR_OWN"
     ```
 
-    On Linux:
+    Sur Linux :
 
     ```sh
     export AWS_ACCESS_KEY_ID="PUT_YOUR_OWN"
@@ -56,25 +56,25 @@ The project is divided into reusable modules to facilitate the management and ma
     ```
 
 
-3. Navigate to the project folder (**app**) and initialize Terraform with the command:
+3. Naviguez dans le dossier du projet (**app**) et initialisez Terraform avec la commande :
 
    ```sh
    terraform init
    ```
 
-4. Apply the Terraform configuration:
+4. Appliquez la configuration Terraform :
 
    ```sh
    terraform apply
    ```
 
-5. Confirm the actions proposed by Terraform when prompted.
+5. Confirmez les actions proposées par Terraform lorsque vous y êtes invité.
 
 ## Configuration
 
-Default variables are defined in the `variables.tf` files of each module. To customize these, I have overridden them in `app/main.tf` when calling the modules. You can create a `terraform.tfvars` file in the `app` folder or pass variables directly via the command line.
+Les variables par défaut sont définies dans les fichiers `variables.tf` de chaque module. Pour personnaliser ces variables, je les ai surchargé dans `app/main.tf` à l'appel des modules. Vous pouvez créez un fichier `terraform.tfvars` dans le dossier `app` ou passez des variables directement via la ligne de commande.
 
-Example content for `app/terraform.tfvars`:
+Exemple de contenu pour `app/terraform.tfvars` :
 
 ```hcl
 instancetype = "t2.micro"
@@ -84,21 +84,21 @@ sg_name = "app-sg"
 
 ## Outputs
 
-After execution, Terraform will display the IDs of the created resources, including the EC2 instance ID and the name of the security group. You will also find the public IP address of the instance in the `app/ip_ec2.txt` file.
+Après l'exécution, Terraform affichera les ID des ressources créées, y compris l'ID de l'instance EC2 et le nom du groupe de sécurité. Vous trouverez également l'adresse IP publique de l'instance dans le fichier `app/ip_ec2.txt`.
 
-## Cleanup
+## Nettoyage
 
-To destroy the infrastructure created by Terraform (and avoid additional charges), run:
+Pour détruire l'infrastructure créée par Terraform (et éviter des frais supplémentaires), exécutez :
 
 ```sh
 terraform destroy
 ```
 
-## Security
+## Sécurité
 
-- Never version your private keys or Terraform state files.
-- Use restrictive IAM policies to control access to AWS resources.
+- Ne versionnez jamais vos clés privées ou vos fichiers d'état Terraform.
+- Utilisez des politiques IAM restrictives pour contrôler l'accès aux ressources AWS.
 
 ## Support
 
-If you encounter any problems or have questions, please open an issue in the project repository.
+Si vous rencontrez des problèmes ou avez des questions, veuillez ouvrir une issue dans le dépôt du projet.
