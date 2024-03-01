@@ -10,7 +10,6 @@ LinkedIn : https://www.linkedin.com/in/juniormbogning/
 ---
 # Infrastructure as Code avec Terraform
 
-<img width="1200" alt="Terraform" src="https://github.com/Abdel-had/mini-projet-terraform/assets/101605739/890fb4c0-f3ad-4d91-b169-486369a47e5a">
 
 Ce projet utilise Terraform pour déployer une application web sur AWS, en provisionnant une instance EC2 avec Ubuntu Bionic, un volume EBS, une adresse IP publique et un groupe de sécurité.
 
@@ -29,14 +28,14 @@ Le projet est divisé en modules réutilisables pour faciliter la gestion et la 
 - Terraform v0.12+ installé sur votre machine locale.
 - AWS CLI configuré avec les identifiants appropriés.
 - Un bucket S3 pour le backend de Terraform (déjà créé puis configuré dans `app/main.tf`).
-- Une clé SSH nommée `devops-abdelhad` doit être disponible et configurée dans AWS.
+- Une clé SSH nommée `devops-junior` doit être disponible et configurée dans AWS.
 
 ## Démarrage Rapide
 
 1. Clonez ce dépôt sur votre machine locale.
 
     ```
-    git clone https://github.com/Abdel-had/mini-projet-terraform.git
+    git clone https://github.com/JMbogning/mini-projet-terraform.git
     ```
 
 2. Assurez-vous que vos identifiants AWS sont configurés correctement.
