@@ -5,7 +5,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "terraform-backend-abdelhad"
-    key    = "abdelhad-dev.tfstate"
+    key    = "junior-dev.tfstate"
     region     = "us-east-1"
   }
 }
@@ -19,7 +19,7 @@ module "ec2_instance" {
   source = "../modules/ec2_instance"
   instancetype = "t2.micro"
   aws_common_tag = {
-    Name = "ec2-dev-abdelhad"
+    Name = "ec2-dev-junior"
   }
   security_group_name = "app-sg"
 }

@@ -21,7 +21,7 @@ data "aws_ami" "app_ami" {
 resource "aws_instance" "myec2" {
   ami             = data.aws_ami.app_ami.id
   instance_type   = var.instancetype
-  key_name        = "devops-abdelhad"
+  key_name        = "devops-junior"
   tags            = var.aws_common_tag
   security_groups = [var.security_group_name]
 
@@ -36,7 +36,7 @@ resource "aws_instance" "myec2" {
   connection {
      type = "ssh"
      user = "ubuntu"
-     private_key = file("C:/Users/abdel/.ssh/devops-abdelhad.pem")
+     private_key = file("C:/Users/junior/.ssh/devops-junior.pem")
      host = self.public_ip
     }
   }
