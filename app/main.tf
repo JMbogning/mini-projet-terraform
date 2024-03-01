@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "terraform-backend-abdelhad"
+    bucket = "terraform-backend-junior"
     key    = "junior-dev.tfstate"
     region     = "us-east-1"
   }
